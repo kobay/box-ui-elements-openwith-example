@@ -1,0 +1,18 @@
+{
+  "name": "box-openwith-sample",
+  "version": "1.0.0",
+  "main": "app.js",
+  "license": "MIT",
+  "engines": {
+    "node": "14.0.x"
+  },
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "axios": "^0.19.2",
+    "box-node-sdk": "^1.32.0",
+    "ejs": "^3.1.2",
+    "express": "^4.17.1"
+  }
+}

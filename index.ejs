@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="utf-8" />
+    <title>Sample</title>
+
+    <link href="https://cdn01.boxcdn.net/platform/elements/11.0.2/ja-JP/openwith.css" rel="stylesheet" type="text/css"></link>
+    <link href="https://cdn01.boxcdn.net/platform/preview/2.34.0/ja-JP/preview.css" rel="stylesheet" type="text/css"></link>
+
+    <script src="https://cdn01.boxcdn.net/platform/elements/11.0.2/ja-JP/openwith.js"></script>
+    <script src="https://cdn01.boxcdn.net/platform/preview/2.34.0/ja-JP/preview.js"></script>
+
+
+</head>
+<body>
+    <h3>File Id: <%= fileId %></h3>
+
+    <div class="openwith" style=""></div>
+    <div class="preview-container" style="height:800px; width:100%;"></div>
+
+    <script>
+        // app.jsから渡されたパラメータ
+        const fileId = "<%= fileId %>"
+        const token = "<%= token %>"
+
+        const openWith = new Box.ContentOpenWith();
+        openWith.show(fileId, token,  { container: ".openwith"})
+
+        const preview = new Box.Preview();
+        preview.show(fileId, token, { container: ".preview-container"});
+    </script>
+</body>
+</html>
