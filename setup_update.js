@@ -67,9 +67,13 @@ const main = async () => {
 
   // 登録可能な統合は、全部登録する。
   for (const ai of appIntegs.body.entries) {
-    const info = await saClient.get(`/app_integrations/${ai.id}`);
-    console.log(`/app_integrations/${ai.id}`);
-    console.log(info.body);
+    // 個別の統合の情報を書き出してみる。
+    {
+      const info = await saClient.get(`/app_integrations/${ai.id}`);
+      console.log(`/app_integrations/${ai.id}`);
+      console.log(info.body);
+    }
+
     await saAxios.post("/app_integration_assignments", {
       assignee: {
         type: "user",
