@@ -11,15 +11,11 @@ app.set("view engine", "ejs");
  * setup.jsで作成したファイルとユーザー
  */
 
-const USER_ID = "12743437371";
-const FILE_ID = "663351457588";
+const USER_ID = "12771965844";
+const FILE_ID = "665319803554";
 
 app.get("/", async (req, res) => {
   try {
-    if (!USER_ID || !FILE_ID) {
-      res.send("USER_IDとFILE_IDに値をいれてください。");
-      return;
-    }
     const sdk = await boxSDK.getPreconfiguredInstance(config);
     // AppUserの権限でClientオブジェクトを作成
     const auClient = await sdk.getAppAuthClient("user", USER_ID);

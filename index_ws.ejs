@@ -43,6 +43,30 @@
     window.preview = new Box.Preview();
     preview.show(fileId, token, { container: ".preview-container", autoFocus: false });
 
+    // ファイルの更新に反応するため、Websocketを利用する
+    const host = location.origin.replace(/^http/, "ws"); // -> wss://xxx.herokuapp.com/
+    const ws = new WebSocket(host);
+
+    let confirmed = null
+    ws.onmessage = event => {
+        // Herokuからメッセージが来たとき。
+        // updatedであれば、簡易的にconfirmウィンドウを出す。
+        // OKを押したら、簡易的にリロードして再読み込みし、変更を反映。
+        // OK, Cancelの確認は一度だけ聞く。
+        if(event.data === "updated" && confirmed !== false) {
+            if(confirmed === null) {
+                confirmed = confirm("refresh?")
+            }
+            if(confirmed) {
+                // previewだけを描画し直す。
+                // window.preview.hide(); // hide()はしてもしなくてもすぐには見た目変わらず。
+                // preview.show(..) // 単純にshowを再度呼んだだけでは画面が更新されない。
+                preview = new Box.Preview(); // preivewオブジェクトは再利用できないっぽい。再度newする必要があるみたい。
+                // 毎回プレビューの位置までスクロールされたくないのでautoFocus:false
+                preview.show(fileId, token, { container: ".preview-container", autoFocus: false });
+            }
+        }
+    }
 </script>
 </body>
 </html>
