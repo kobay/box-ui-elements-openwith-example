@@ -17,6 +17,7 @@ const main = async () => {
   console.log(appUser);
 
   // ファイル追加
+  saClient.asUser(appUser.id);
   {
     const stream = fs.createReadStream("./Sample.pptx");
     const files = await saClient.files.uploadFile("0", "Sample.pptx", stream);
@@ -29,6 +30,7 @@ const main = async () => {
     const file = files.entries[0];
     console.log(`file id=${file.id} name=${file.name}`);
   }
+  saClient.asSelf();
 
   // 現在利用可能なWebApp統合を一覧する
   const appIntegs = await saClient.get("/app_integrations");
